@@ -22,36 +22,15 @@ namespace DonkeyKong.Sprites
         {
         }
 
-        protected override void SetAnimations()
+        protected virtual void SetAnimations()
         {
-            if (Velocity.X > 0)
-                _animationManager.Play(_animations["WalkRight"]);
-            else if (Velocity.X < 0)
-                _animationManager.Play(_animations["WalkLeft"]);
-            else if (Velocity.Y > 0)
-                _animationManager.Play(_animations["WalkDown"]);
-            else if (Velocity.Y < 0)
-                _animationManager.Play(_animations["WalkUp"]);
-            else _animationManager.Stop();
+            _animationManager.Play(_animations["Animated"]);
         }
 
 
-        public virtual void Move()
-        {
-            if (Keyboard.GetState().IsKeyDown(Input.Up))
-                Velocity.Y = -Speed;
-            if (Keyboard.GetState().IsKeyDown(Input.Down))
-                Velocity.Y = Speed;
-            if (Keyboard.GetState().IsKeyDown(Input.Left))
-                Velocity.X = -Speed;
-            if (Keyboard.GetState().IsKeyDown(Input.Right))
-                Velocity.X = Speed;
-        }
 
-        public void Update(GameTime gameTime, List<MovingAnimatedSprite> sprites)
+        public virtual void Update(GameTime gameTime)
         {
-
-            Move();
 
             SetAnimations();
 

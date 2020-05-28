@@ -1,6 +1,7 @@
 ﻿using DonkeyKong.Managers;
 using DonkeyKong.Models;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -19,6 +20,8 @@ namespace DonkeyKong.Sprites
 
         protected Dictionary<string, Animation> _animations;
 
+        
+
 
         float timer = 3;         //Initialize a 3 second timer
         const float TIMER = 3;
@@ -28,6 +31,8 @@ namespace DonkeyKong.Sprites
         #region Properties
 
         public Input Input;
+
+        public SoundEffect SoundEffect;
 
         public Vector2 Position
         {
@@ -72,14 +77,10 @@ namespace DonkeyKong.Sprites
             else throw new Exception("This ain't right..!");
         }
 
-        protected virtual void SetAnimations()
-        {
-            
-            _animationManager.Play(_animations["Animated"]);
-        }
+        
 
 
-        public virtual void Update(GameTime gameTime, List<AnimatedSprite> sprites)
+        public override void Update(GameTime gameTime)
         {
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
             timer -= elapsed;
@@ -87,9 +88,18 @@ namespace DonkeyKong.Sprites
             {
                 //Timer expired, execute action
                 timer = TIMER;   //Reset Timer
-
+                if (SoundEffect != null)
+                {
+                    SoundEffect.Play();
+                }
+                
                 //SetAnimations();
             }
+            hitbox = new Rectangle(
+                    (int)_position.X,
+                    (int)_position.Y,
+                    _animations.First().Value.FrameWidth,
+                    _animations.First().Value.FrameHeight);
 
             _animationManager.Update(gameTime);
 

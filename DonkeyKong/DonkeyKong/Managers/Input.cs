@@ -18,5 +18,7 @@ namespace DonkeyKong.Managers
         public Keys Right { get; set; }
 
         public Keys Up { get; set; }
+
+        public List<Keys> Jump { get; set; }
     }
 }

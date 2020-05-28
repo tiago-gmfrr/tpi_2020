@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/ground.png</SourceFile>
-  <SourceTime>2020-05-25T16:56:27.3396672+02:00</SourceTime>
-  <DestFile>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/bin/Windows/Graphics/ground.xnb</DestFile>
-  <DestTime>2020-05-26T14:46:23.6067715+02:00</DestTime>
+  <SourceFile>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/Ground.png</SourceFile>
+  <SourceTime>2020-05-28T09:07:45.0212906+02:00</SourceTime>
+  <DestFile>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/bin/Windows/Graphics/Ground.xnb</DestFile>
+  <DestTime>2020-05-28T21:09:50.0998748+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

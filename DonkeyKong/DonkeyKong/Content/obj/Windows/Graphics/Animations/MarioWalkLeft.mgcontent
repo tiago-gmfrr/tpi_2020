@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/Animations/MarioWalkLeft.png</SourceFile>
-  <SourceTime>2020-05-26T10:25:25.3896249+02:00</SourceTime>
+  <SourceTime>2020-05-28T21:04:30.9903157+02:00</SourceTime>
   <DestFile>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/bin/Windows/Graphics/Animations/MarioWalkLeft.xnb</DestFile>
-  <DestTime>2020-05-26T14:46:23.5547216+02:00</DestTime>
+  <DestTime>2020-05-28T21:09:50.0638426+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

@@ -11,6 +11,8 @@ using DonkeyKong.Managers;
 using Microsoft.Xna.Framework.Input;
 using DonkeyKong.Controls;
 using System.Linq;
+using Microsoft.Xna.Framework.Audio;
+using DonkeyKong.GameComponents;
 
 namespace DonkeyKong.States
 {
@@ -24,21 +26,21 @@ namespace DonkeyKong.States
         #region Variables
 
         MenuButton playButton;
+        MenuButton infoButton;
+        MenuButton exitButton;
 
-        private List<MovingAnimatedSprite> _mario;
+        private Mario _mario;
 
         private List<AnimatedSprite> _menuBarrels;
 
-        private List<AnimatedSprite> _menuKong;
+        private AnimatedSprite _menuKong;
 
         Dictionary<string, Animation> animationsMovementMario;
 
-
-        Game1 _game;
+        Song backgroundMusic;
 
         GenericSprite DKTitle;
 
-        GraphicsDevice _graphicsDevice;
         #endregion
 
         #region Constructor
@@ -46,11 +48,11 @@ namespace DonkeyKong.States
         public HomeMenu(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
-            _game = game;
-            _graphicsDevice = graphicsDevice;
 
-            DKTitle = new GenericSprite(game);
-            playButton = new MenuButton(game);
+            DKTitle = new GenericSprite(_game);
+            playButton = new MenuButton(_game);
+            infoButton = new MenuButton(_game);
+            exitButton = new MenuButton(_game);
 
             LoadContent();
             Initialize();
@@ -62,7 +64,11 @@ namespace DonkeyKong.States
         {
           
             DKTitle.Initialize(new Vector2(_graphicsDevice.Viewport.Width / 2 - DKTitle._texture.Width / 2, _graphicsDevice.Viewport.Height * 0.05f));
-            playButton.Initialize(new Vector2(_graphicsDevice.Viewport.Width * 0.45f, _graphicsDevice.Viewport.Height * 0.7f));
+            playButton.Initialize(new Vector2(_graphicsDevice.Viewport.Width * 0.25f, _graphicsDevice.Viewport.Height * 0.75f));
+            infoButton.Initialize(new Vector2(_graphicsDevice.Viewport.Width * 0.45f, _graphicsDevice.Viewport.Height * 0.75f));
+            exitButton.Initialize(new Vector2(_graphicsDevice.Viewport.Width * 0.65f, _graphicsDevice.Viewport.Height * 0.75f));
+
+
         }
 
         private void LoadContent()
@@ -75,19 +81,16 @@ namespace DonkeyKong.States
                 { "WalkUp", new Animation(_content.Load<Texture2D>("Graphics/Animations/MarioWalkRight"), 3)},
             };
 
-            _mario = new List<MovingAnimatedSprite>()
+            _mario = new Mario(_game, animationsMovementMario, _graphicsDevice)
             {
-                new MovingAnimatedSprite(_game, animationsMovementMario)
+                Position = new Vector2(100, _graphicsDevice.Viewport.Height * 0.8f),
+                Input = new Input()
                 {
-                    Position = new Vector2(100,_graphicsDevice.Viewport.Height * 0.8f),
-                    Input = new Input()
-                    {
-                        Up = Keys.W,
-                        Down = Keys.S,
-                        Left = Keys.A,
-                        Right = Keys.D,
-                    }
-                },
+                    Up = Keys.W,
+                    Down = Keys.S,
+                    Left = Keys.A,
+                    Right = Keys.D,
+                }
             };
 
             var animationsMenuBarrels1 = new Dictionary<string, Animation>()
@@ -119,18 +122,25 @@ namespace DonkeyKong.States
                 { "Animated", new Animation(_content.Load<Texture2D>("Graphics/Animations/KongIdleAnimation"),3)},
             };
 
-            _menuKong = new List<AnimatedSprite>()
-            {
-                new AnimatedSprite(_game, animationsMenuKong)
-                {
 
-                    Position = new Vector2(_graphicsDevice.Viewport.Width * 0.4f,_graphicsDevice.Viewport.Height * 0.3f),
-                },
+            _menuKong = new AnimatedSprite(_game, animationsMenuKong)
+            {
+
+                Position = new Vector2(_graphicsDevice.Viewport.Width * 0.4f, _graphicsDevice.Viewport.Height * 0.3f),
+                SoundEffect = _game.Content.Load<SoundEffect>("Sounds/SoundEffects/jumpbar")
             };
+
+            backgroundMusic = _game.Content.Load<Song>("Sounds/Music/backmusic");
+
+            MediaPlayer.IsRepeating = true;
+
+            MediaPlayer.Play(backgroundMusic);
 
 
             DKTitle.LoadContent("Graphics/DKTitle");
             playButton.LoadContent("Controls/PlayButton");
+            infoButton.LoadContent("Controls/InfoButton");
+            exitButton.LoadContent("Controls/ExitButton");
         }
         #endregion
 
@@ -141,69 +151,51 @@ namespace DonkeyKong.States
 
             DKTitle.Draw(spriteBatch);
             playButton.Draw(spriteBatch);
+            infoButton.Draw(spriteBatch);
+            exitButton.Draw(spriteBatch);
 
-            foreach (var sprite in _mario)
-                sprite.Draw(spriteBatch);
+            _mario.Draw(spriteBatch);
 
             foreach (var sprite in _menuBarrels)
                 sprite.Draw(spriteBatch);
-
-            foreach (var sprite in _menuKong)
-                sprite.Draw(spriteBatch);
             
-        }
-
-
-        public override void PostUpdate(GameTime gameTime)
-        {
-            // remove sprites if they're not needed
+            _menuKong.Draw(spriteBatch);
+            
         }
 
         public override void Update(GameTime gameTime)
         {
             DKTitle.Update(gameTime);
-            playButton.Update(gameTime, new Rectangle( (int)_mario[0].Position.X, (int)_mario[0].Position.Y, animationsMovementMario.First().Value.Texture.Width /3 , animationsMovementMario.First().Value.Texture.Height));
 
-            if (playButton.StartGame())
+            
+            playButton.Update(gameTime, _mario.Hitbox);
+            infoButton.Update(gameTime, _mario.Hitbox);
+            exitButton.Update(gameTime, _mario.Hitbox);
+
+            if (playButton.ButtonPressed())
+            {
+                _game.ChangeState(new DonkeyKong(_game, _graphicsDevice, _content));
+                MediaPlayer.Stop();
+            }
+            else if (infoButton.ButtonPressed())
+            {
+                _game.ChangeState(new InfoPage(_game, _graphicsDevice, _content));
+                MediaPlayer.Stop();
+            }
+            else if (exitButton.ButtonPressed())
             {
                 _game.Exit();
             }
 
             foreach (var sprite in _menuBarrels)
-                sprite.Update(gameTime, _menuBarrels);
+                sprite.Update(gameTime);
 
-
-            foreach (var sprite in _mario)
-                sprite.Update(gameTime, _mario);
-
-
-            foreach (var sprite in _menuKong)
-                sprite.Update(gameTime, _menuKong);
+            _mario.Update(gameTime);
+            _menuKong.Update(gameTime);
 
 
         }
         #endregion
 
-        #region Button events
-        /// <summary>
-        /// Starts the game in survival mode, which is represented has "level 0"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void PlayGameButton_Click(object sender, EventArgs e)
-        {
-            // _game.ChangeState(new DonkeyKong(_game, _graphicsDevice, _content));
-
-        }
-        /// <summary>
-        /// Exits the game
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void QuitGameButton_Click(object sender, EventArgs e)
-        {
-            _game.Exit();
-        }
-        #endregion
     }
 }

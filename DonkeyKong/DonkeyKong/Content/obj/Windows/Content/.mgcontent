@@ -6,6 +6,9 @@
   <SourceFiles>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/basicFont.spritefont</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Controls/Button.png</File>
+    <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Controls/ExitButton.png</File>
+    <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Controls/GoBackButton.png</File>
+    <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Controls/InfoButton.png</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Controls/PlayButton.png</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/Animations/barrelAnimation.png</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/Animations/barrelFallAnimation.png</File>
@@ -15,8 +18,12 @@
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/Animations/MarioWalkRight.png</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/Animations/MenuBarrels.png</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/Animations/OilBarrelAnimation.png</File>
+    <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/ArcadeButtons.png</File>
+    <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/ArcadeButtonsInfoText.png</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/DKTitle.png</File>
-    <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/ground.png</File>
+    <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/Ground.png</File>
+    <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/Joystick.png</File>
+    <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/JoystickInfoText.png</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/KongCenter.png</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/KongLeft.png</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/KongRight.png</File>
@@ -24,8 +31,23 @@
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/MarioMenuPicker.png</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/OilBarrel.png</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/StackedBarrels.png</File>
+    <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Sounds/Music/backmusic.mp3</File>
+    <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Sounds/Music/bacmusic.wav</File>
+    <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Sounds/Music/intro1_long.wav</File>
+    <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Sounds/SoundEffects/jumpbar.wav</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

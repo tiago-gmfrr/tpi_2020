@@ -52,17 +52,17 @@ namespace DonkeyKong.Controls
             
         }
 
-        public bool StartGame()
+        public bool ButtonPressed()
         {
-            bool start = false;
+            bool pressed = false;
             KeyboardState keyboardState = Keyboard.GetState();
 
             if (collisionWithMario && keyboardState.IsKeyDown(Keys.V))
             {
-                start = true;
+                pressed = true;
             }
 
-            return start;
+            return pressed;
         }
     }
 }

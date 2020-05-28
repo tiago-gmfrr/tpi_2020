@@ -83,7 +83,7 @@ namespace DonkeyKong
             }
 
             _currentState.Update(gameTime);
-            _currentState.PostUpdate(gameTime);
+            //_currentState.PostUpdate(gameTime);
 
             base.Update(gameTime);
         }

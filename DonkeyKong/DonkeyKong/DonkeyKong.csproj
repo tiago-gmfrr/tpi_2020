@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Controls\MenuButton.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="GameComponents\Brick.cs" />
     <Compile Include="GameComponents\Mario.cs" />
     <Compile Include="Managers\AnimationManager.cs" />
     <Compile Include="Managers\Input.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Sprites\MovingAnimatedSprite.cs" />
     <Compile Include="States\DonkeyKong.cs" />
     <Compile Include="States\HomeMenu.cs" />
+    <Compile Include="States\InfoPage.cs" />
     <Compile Include="States\State.cs" />
   </ItemGroup>
   <ItemGroup>
