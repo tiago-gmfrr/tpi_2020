@@ -11,7 +11,7 @@ namespace DonkeyKong.Managers
 {
     class AnimationManager
     {
-        private Animation _animation;
+        public Animation _animation;
 
         private float _timer;
 
@@ -44,6 +44,8 @@ namespace DonkeyKong.Managers
 
             _timer = 0;
         }
+
+
 
         /// <summary>
         /// Maybe put it at the end of the play method

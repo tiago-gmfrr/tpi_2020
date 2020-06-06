@@ -1,4 +1,5 @@
-﻿using DonkeyKong.Models;
+﻿using DonkeyKong.Managers;
+using DonkeyKong.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -12,6 +13,7 @@ namespace DonkeyKong.Sprites
 {
     class MovingAnimatedSprite : AnimatedSprite
     {
+        public Input Input;
 
         public MovingAnimatedSprite(Game game, Dictionary<string, Animation> animations):base(game, animations)
         {
@@ -22,17 +24,16 @@ namespace DonkeyKong.Sprites
         {
         }
 
-        protected virtual void SetAnimations()
+        protected virtual void SetAnimationsAndSounds()
         {
-            _animationManager.Play(_animations["Animated"]);
+            _animationManager.Play(_animations["Animation"]);
         }
 
 
 
         public virtual void Update(GameTime gameTime)
         {
-
-            SetAnimations();
+            SetAnimationsAndSounds();
 
             _animationManager.Update(gameTime);
 

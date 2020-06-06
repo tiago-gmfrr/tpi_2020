@@ -1,4 +1,5 @@
-﻿using DonkeyKong.Sprites;
+﻿using DonkeyKong.Managers;
+using DonkeyKong.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -13,6 +14,9 @@ namespace DonkeyKong.Controls
     class MenuButton : GenericSprite
     {
         bool collisionWithMario;
+
+        public Input Input;
+
         public MenuButton(Game game) : base(game)
         {
             collisionWithMario = false;
@@ -57,10 +61,15 @@ namespace DonkeyKong.Controls
             bool pressed = false;
             KeyboardState keyboardState = Keyboard.GetState();
 
-            if (collisionWithMario && keyboardState.IsKeyDown(Keys.V))
+            foreach (Keys k in Input.Action)
             {
-                pressed = true;
+                if (collisionWithMario && keyboardState.IsKeyDown(k))
+                {
+                    pressed = true;
+                }
             }
+
+            
 
             return pressed;
         }

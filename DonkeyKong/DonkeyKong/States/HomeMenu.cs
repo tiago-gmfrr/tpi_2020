@@ -25,9 +25,9 @@ namespace DonkeyKong.States
 
         #region Variables
 
-        MenuButton playButton;
-        MenuButton infoButton;
-        MenuButton exitButton;
+        private MenuButton playButton;
+        private MenuButton infoButton;
+        private MenuButton exitButton;
 
         private Mario _mario;
 
@@ -35,11 +35,13 @@ namespace DonkeyKong.States
 
         private AnimatedSprite _menuKong;
 
-        Dictionary<string, Animation> animationsMovementMario;
+        private Dictionary<string, Animation> animationsMovementMario;
 
-        Song backgroundMusic;
+        private Song menuBackgroundMusic;
+        private Song gameBackgroundMusic;
 
-        GenericSprite DKTitle;
+
+        private GenericSprite DKTitle;
 
         #endregion
 
@@ -56,18 +58,29 @@ namespace DonkeyKong.States
 
             LoadContent();
             Initialize();
-            
-            
+
+
         }
 
         private void Initialize()
         {
-          
+
             DKTitle.Initialize(new Vector2(_graphicsDevice.Viewport.Width / 2 - DKTitle._texture.Width / 2, _graphicsDevice.Viewport.Height * 0.05f));
             playButton.Initialize(new Vector2(_graphicsDevice.Viewport.Width * 0.25f, _graphicsDevice.Viewport.Height * 0.75f));
+            playButton.Input = new Input()
+            {
+                Action = new List<Keys>() { Keys.Space, Keys.F, Keys.G, Keys.H, Keys.V, Keys.B, Keys.N }
+            };
             infoButton.Initialize(new Vector2(_graphicsDevice.Viewport.Width * 0.45f, _graphicsDevice.Viewport.Height * 0.75f));
+            infoButton.Input = new Input()
+            {
+                Action = new List<Keys>() { Keys.Space, Keys.F, Keys.G, Keys.H, Keys.V, Keys.B, Keys.N }
+            };
             exitButton.Initialize(new Vector2(_graphicsDevice.Viewport.Width * 0.65f, _graphicsDevice.Viewport.Height * 0.75f));
-
+            exitButton.Input = new Input()
+            {
+                Action = new List<Keys>() { Keys.Space, Keys.F, Keys.G, Keys.H, Keys.V, Keys.B, Keys.N }
+            };
 
         }
 
@@ -81,7 +94,14 @@ namespace DonkeyKong.States
                 { "WalkUp", new Animation(_content.Load<Texture2D>("Graphics/Animations/MarioWalkRight"), 3)},
             };
 
-            _mario = new Mario(_game, animationsMovementMario, _graphicsDevice)
+            Dictionary<string, SoundEffect> marioSOundEffects = new Dictionary<string, SoundEffect>()
+            {
+                {"Walking", _content.Load<SoundEffect>("Sounds/SoundEffects/walking") },
+                {"Jump", _content.Load<SoundEffect>("Sounds/SoundEffects/jump") },
+                {"Climbing", _content.Load<SoundEffect>("Sounds/SoundEffects/marioClimb") },
+            };
+
+            _mario = new Mario(_game, animationsMovementMario, marioSOundEffects, _graphicsDevice)
             {
                 Position = new Vector2(100, _graphicsDevice.Viewport.Height * 0.8f),
                 Input = new Input()
@@ -107,13 +127,13 @@ namespace DonkeyKong.States
             {
                 new AnimatedSprite(_game, animationsMenuBarrels1)
                 {
-                    
-                    Position = new Vector2(_graphicsDevice.Viewport.Width * 0.05f,_graphicsDevice.Viewport.Height * 0.3f),
+
+                    Position = new Vector2(_graphicsDevice.Viewport.Width * 0.05f,_graphicsDevice.Viewport.Height * 0.35f),
                 },
                 new AnimatedSprite(_game, animationsMenuBarrels2)
                 {
 
-                    Position = new Vector2(_graphicsDevice.Viewport.Width * 0.85f,_graphicsDevice.Viewport.Height * 0.3f),
+                    Position = new Vector2(_graphicsDevice.Viewport.Width * 0.82f,_graphicsDevice.Viewport.Height * 0.35f),
                 },
             };
 
@@ -123,19 +143,18 @@ namespace DonkeyKong.States
             };
 
 
-            _menuKong = new AnimatedSprite(_game, animationsMenuKong)
-            {
+            _menuKong = new AnimatedSprite(_game, animationsMenuKong);
 
-                Position = new Vector2(_graphicsDevice.Viewport.Width * 0.4f, _graphicsDevice.Viewport.Height * 0.3f),
-                SoundEffect = _game.Content.Load<SoundEffect>("Sounds/SoundEffects/jumpbar")
-            };
+            _menuKong.Position = new Vector2(_graphicsDevice.Viewport.Width / 2 - _menuKong.width / 2, _graphicsDevice.Viewport.Height * 0.45f);
 
-            backgroundMusic = _game.Content.Load<Song>("Sounds/Music/backmusic");
 
+            gameBackgroundMusic = _game.Content.Load<Song>("Sounds/Music/gameMusic");
+            menuBackgroundMusic = _game.Content.Load<Song>("Sounds/Music/menuMusic");
+
+
+            MediaPlayer.Play(menuBackgroundMusic);
+            MediaPlayer.Volume = 0.1f;
             MediaPlayer.IsRepeating = true;
-
-            MediaPlayer.Play(backgroundMusic);
-
 
             DKTitle.LoadContent("Graphics/DKTitle");
             playButton.LoadContent("Controls/PlayButton");
@@ -158,34 +177,20 @@ namespace DonkeyKong.States
 
             foreach (var sprite in _menuBarrels)
                 sprite.Draw(spriteBatch);
-            
+
             _menuKong.Draw(spriteBatch);
-            
+
         }
 
         public override void Update(GameTime gameTime)
         {
             DKTitle.Update(gameTime);
 
-            
+
             playButton.Update(gameTime, _mario.Hitbox);
             infoButton.Update(gameTime, _mario.Hitbox);
             exitButton.Update(gameTime, _mario.Hitbox);
-
-            if (playButton.ButtonPressed())
-            {
-                _game.ChangeState(new DonkeyKong(_game, _graphicsDevice, _content));
-                MediaPlayer.Stop();
-            }
-            else if (infoButton.ButtonPressed())
-            {
-                _game.ChangeState(new InfoPage(_game, _graphicsDevice, _content));
-                MediaPlayer.Stop();
-            }
-            else if (exitButton.ButtonPressed())
-            {
-                _game.Exit();
-            }
+            ChangeStateConditions();
 
             foreach (var sprite in _menuBarrels)
                 sprite.Update(gameTime);
@@ -194,6 +199,30 @@ namespace DonkeyKong.States
             _menuKong.Update(gameTime);
 
 
+        }
+
+        private void ChangeStateConditions()
+        {
+            if (playButton.ButtonPressed())
+            {
+                MediaPlayer.Play(gameBackgroundMusic);
+                MediaPlayer.Volume = 0.5f;
+                _mario.StopAllSoundInstances();
+                _game.ChangeState(new DonkeyKong(_game, _graphicsDevice, _content));
+
+            }
+            else if (infoButton.ButtonPressed())
+            {
+                _mario.StopAllSoundInstances();
+                MediaPlayer.Stop();
+                _game.ChangeState(new InfoPage(_game, _graphicsDevice, _content));
+
+
+            }
+            else if (exitButton.ButtonPressed())
+            {
+                _game.Exit();
+            }
         }
         #endregion
 

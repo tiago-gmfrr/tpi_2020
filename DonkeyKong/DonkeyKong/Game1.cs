@@ -16,7 +16,7 @@ namespace DonkeyKong
         SpriteBatch spriteBatch;
 
 
-        //Variables to use for the changing of states between gameState and MenuState
+        //Variables to use for the changing of states
         private State _currentState;
         private State _nextState;
         #endregion
@@ -37,11 +37,11 @@ namespace DonkeyKong
         protected override void Initialize()
         {
 
-            IsMouseVisible = true;
+            IsMouseVisible = false;
             graphics.GraphicsProfile = GraphicsProfile.Reach;
 
-            graphics.PreferredBackBufferWidth = 1280;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            graphics.PreferredBackBufferHeight = 720;// GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            graphics.PreferredBackBufferWidth = 900;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            graphics.PreferredBackBufferHeight = 1000;// GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
 
             //graphics.IsFullScreen = true;
@@ -60,14 +60,6 @@ namespace DonkeyKong
             _currentState = new HomeMenu(this, graphics.GraphicsDevice, Content);
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
-        protected override void UnloadContent()
-        {
-
-        }
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
@@ -76,6 +68,7 @@ namespace DonkeyKong
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            //If a next state is assigned 
             if (_nextState != null)
             {
                 _currentState = _nextState;

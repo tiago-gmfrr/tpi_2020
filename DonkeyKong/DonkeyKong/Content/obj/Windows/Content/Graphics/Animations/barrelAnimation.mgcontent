@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/Animations/barrelAnimation.png</SourceFile>
-  <SourceTime>2020-05-25T16:35:19.4816499+02:00</SourceTime>
+  <SourceTime>2020-06-05T13:43:21.7352699+02:00</SourceTime>
   <DestFile>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/bin/Windows/Content/Graphics/Animations/barrelAnimation.xnb</DestFile>
-  <DestTime>2020-05-25T16:58:19.8613689+02:00</DestTime>
+  <DestTime>2020-06-05T13:43:23.6263897+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

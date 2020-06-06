@@ -9,6 +9,7 @@ using DonkeyKong.Managers;
 using DonkeyKong.Models;
 using DonkeyKong.Sprites;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -51,6 +52,10 @@ namespace DonkeyKong.States
             arcadeButtons.Initialize(new Vector2(_graphicsDevice.Viewport.Width * 0.03f, _graphicsDevice.Viewport.Height * 0.6f));
             arcadeButtonsInfoText.Initialize(new Vector2(_graphicsDevice.Viewport.Width * 0.25f, _graphicsDevice.Viewport.Height * 0.65f));
             goBackButton.Initialize(new Vector2(_graphicsDevice.Viewport.Width * 0.85f, _graphicsDevice.Viewport.Height * 0.75f));
+            goBackButton.Input = new Input()
+            {
+                Action = new List<Keys>() { Keys.Space, Keys.F, Keys.G, Keys.H, Keys.V, Keys.B, Keys.N }
+            };
         }
 
         public void LoadContent()
@@ -70,7 +75,14 @@ namespace DonkeyKong.States
                 { "WalkUp", new Animation(_content.Load<Texture2D>("Graphics/Animations/MarioWalkRight"), 3)},
             };
 
-            _mario = new Mario(_game, animationsMovementMario, _graphicsDevice)
+            Dictionary<string, SoundEffect> marioSOundEffects = new Dictionary<string, SoundEffect>()
+            {
+                {"Walking", _content.Load<SoundEffect>("Sounds/SoundEffects/walking") },
+                {"Jump", _content.Load<SoundEffect>("Sounds/SoundEffects/jump") },
+                {"Climbing", _content.Load<SoundEffect>("Sounds/SoundEffects/marioClimb") },
+            };
+
+            _mario = new Mario(_game, animationsMovementMario, marioSOundEffects, _graphicsDevice)
             {
                 Position = new Vector2(_graphicsDevice.Viewport.Width * 0.75f, _graphicsDevice.Viewport.Height * 0.8f),
                 Input = new Input()

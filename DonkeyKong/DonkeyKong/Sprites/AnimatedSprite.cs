@@ -16,9 +16,9 @@ namespace DonkeyKong.Sprites
     {
         #region Fields
 
-        protected AnimationManager _animationManager;
+        public AnimationManager _animationManager;
 
-        protected Dictionary<string, Animation> _animations;
+        public Dictionary<string, Animation> _animations;
 
         
 
@@ -30,9 +30,7 @@ namespace DonkeyKong.Sprites
 
         #region Properties
 
-        public Input Input;
-
-        public SoundEffect SoundEffect;
+        
 
         public Vector2 Position
         {
@@ -45,9 +43,12 @@ namespace DonkeyKong.Sprites
                     _animationManager.Position = _position;
             }
         }
-        
 
-        public float Speed = 2f;
+        public int height;
+        public int width;
+
+
+        public Vector2 Speed = new Vector2(2f, 2f);
 
         public Vector2 Velocity;
 
@@ -60,6 +61,8 @@ namespace DonkeyKong.Sprites
         {
             _animations = animations;
             _animationManager = new AnimationManager(_animations.First().Value);
+            height = _animations.First().Value.FrameHeight;
+            width = _animations.First().Value.FrameWidth;
         }
 
         public AnimatedSprite(Game game, Texture2D texture) : base(game)
@@ -82,26 +85,15 @@ namespace DonkeyKong.Sprites
 
         public override void Update(GameTime gameTime)
         {
-            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            timer -= elapsed;
-            if (timer < 0)
-            {
-                //Timer expired, execute action
-                timer = TIMER;   //Reset Timer
-                if (SoundEffect != null)
-                {
-                    SoundEffect.Play();
-                }
-                
-                //SetAnimations();
-            }
+
+            _animationManager.Update(gameTime);
             hitbox = new Rectangle(
                     (int)_position.X,
                     (int)_position.Y,
                     _animations.First().Value.FrameWidth,
                     _animations.First().Value.FrameHeight);
 
-            _animationManager.Update(gameTime);
+            
 
             Position += Velocity;
             Velocity = Vector2.Zero;
