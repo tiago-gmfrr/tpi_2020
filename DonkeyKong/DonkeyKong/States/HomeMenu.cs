@@ -1,5 +1,12 @@
-﻿
-using System;
+﻿/***
+* Program : DonkeyKong
+* Author : Tiago Gama
+* Project : TPI 2020
+* Date : 25.05.2020 - 09.06.2020
+* Version : 1.0
+* Description : Recreation of the original Donkey Kong game by Nintendo
+***/
+
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -10,20 +17,18 @@ using DonkeyKong.Models;
 using DonkeyKong.Managers;
 using Microsoft.Xna.Framework.Input;
 using DonkeyKong.Controls;
-using System.Linq;
 using Microsoft.Xna.Framework.Audio;
 using DonkeyKong.GameComponents;
 
 namespace DonkeyKong.States
 {
     /// <summary>
-    ///  Just a menu with Play and Exit buttons
-    ///  Original source : https://github.com/Oyyou/MonoGame_Tutorials
+    ///  The first page the user meets, they will be able to control Mario and press any of the buttons to activate their corresponding actions, such as playing the game, going to the info page or exiting the game
+    ///  Inspiration : https://github.com/Oyyou/MonoGame_Tutorials/tree/master/MonoGame_Tutorials/Tutorial013
     /// </summary>
     class HomeMenu : State
     {
 
-        #region Variables
 
         private MenuButton playButton;
         private MenuButton infoButton;
@@ -43,9 +48,6 @@ namespace DonkeyKong.States
 
         private GenericSprite DKTitle;
 
-        #endregion
-
-        #region Constructor
 
         public HomeMenu(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
@@ -62,28 +64,9 @@ namespace DonkeyKong.States
 
         }
 
-        private void Initialize()
-        {
-
-            DKTitle.Initialize(new Vector2(_graphicsDevice.Viewport.Width / 2 - DKTitle._texture.Width / 2, _graphicsDevice.Viewport.Height * 0.05f));
-            playButton.Initialize(new Vector2(_graphicsDevice.Viewport.Width * 0.25f, _graphicsDevice.Viewport.Height * 0.75f));
-            playButton.Input = new Input()
-            {
-                Action = new List<Keys>() { Keys.Space, Keys.F, Keys.G, Keys.H, Keys.V, Keys.B, Keys.N }
-            };
-            infoButton.Initialize(new Vector2(_graphicsDevice.Viewport.Width * 0.45f, _graphicsDevice.Viewport.Height * 0.75f));
-            infoButton.Input = new Input()
-            {
-                Action = new List<Keys>() { Keys.Space, Keys.F, Keys.G, Keys.H, Keys.V, Keys.B, Keys.N }
-            };
-            exitButton.Initialize(new Vector2(_graphicsDevice.Viewport.Width * 0.65f, _graphicsDevice.Viewport.Height * 0.75f));
-            exitButton.Input = new Input()
-            {
-                Action = new List<Keys>() { Keys.Space, Keys.F, Keys.G, Keys.H, Keys.V, Keys.B, Keys.N }
-            };
-
-        }
-
+        /// <summary>
+        /// LoadContent will be called once per game to load all the content
+        /// </summary>
         private void LoadContent()
         {
             animationsMovementMario = new Dictionary<string, Animation>()
@@ -145,7 +128,7 @@ namespace DonkeyKong.States
 
             _menuKong = new AnimatedSprite(_game, animationsMenuKong);
 
-            _menuKong.Position = new Vector2(_graphicsDevice.Viewport.Width / 2 - _menuKong.width / 2, _graphicsDevice.Viewport.Height * 0.45f);
+            _menuKong.Position = new Vector2(_graphicsDevice.Viewport.Width / 2 - _menuKong._width / 2, _graphicsDevice.Viewport.Height * 0.45f);
 
 
             gameBackgroundMusic = _game.Content.Load<Song>("Sounds/Music/gameMusic");
@@ -161,27 +144,36 @@ namespace DonkeyKong.States
             infoButton.LoadContent("Controls/InfoButton");
             exitButton.LoadContent("Controls/ExitButton");
         }
-        #endregion
 
-        #region Updates + Draw
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        /// <summary>
+        /// Ininializes all the necessary variables before the game starts
+        /// </summary>
+        private void Initialize()
         {
-            _graphicsDevice.Clear(Color.Black);
 
-            DKTitle.Draw(spriteBatch);
-            playButton.Draw(spriteBatch);
-            infoButton.Draw(spriteBatch);
-            exitButton.Draw(spriteBatch);
-
-            _mario.Draw(spriteBatch);
-
-            foreach (var sprite in _menuBarrels)
-                sprite.Draw(spriteBatch);
-
-            _menuKong.Draw(spriteBatch);
+            DKTitle.Initialize(new Vector2(_graphicsDevice.Viewport.Width / 2 - DKTitle._texture.Width / 2, _graphicsDevice.Viewport.Height * 0.05f));
+            playButton.Initialize(new Vector2(_graphicsDevice.Viewport.Width * 0.25f, _graphicsDevice.Viewport.Height * 0.75f));
+            playButton.Input = new Input()
+            {
+                Action = new List<Keys>() { Keys.Space, Keys.F, Keys.G, Keys.H, Keys.V, Keys.B, Keys.N }
+            };
+            infoButton.Initialize(new Vector2(_graphicsDevice.Viewport.Width * 0.45f, _graphicsDevice.Viewport.Height * 0.75f));
+            infoButton.Input = new Input()
+            {
+                Action = new List<Keys>() { Keys.Space, Keys.F, Keys.G, Keys.H, Keys.V, Keys.B, Keys.N }
+            };
+            exitButton.Initialize(new Vector2(_graphicsDevice.Viewport.Width * 0.65f, _graphicsDevice.Viewport.Height * 0.75f));
+            exitButton.Input = new Input()
+            {
+                Action = new List<Keys>() { Keys.Space, Keys.F, Keys.G, Keys.H, Keys.V, Keys.B, Keys.N }
+            };
 
         }
 
+        /// <summary>
+        /// Runs the state's logic, collisions, etc
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values</param
         public override void Update(GameTime gameTime)
         {
             DKTitle.Update(gameTime);
@@ -201,6 +193,9 @@ namespace DonkeyKong.States
 
         }
 
+        /// <summary>
+        /// Conditions needed to go another state
+        /// </summary>
         private void ChangeStateConditions()
         {
             if (playButton.ButtonPressed())
@@ -224,7 +219,29 @@ namespace DonkeyKong.States
                 _game.Exit();
             }
         }
-        #endregion
+
+        /// <summary>
+        /// All objects are drawn here
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values</param>
+        /// <param name="spriteBatch">Helper class for drawing strings and sprites</param>
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            _graphicsDevice.Clear(Color.Black);
+
+            DKTitle.Draw(spriteBatch);
+            playButton.Draw(spriteBatch);
+            infoButton.Draw(spriteBatch);
+            exitButton.Draw(spriteBatch);
+
+            _mario.Draw(spriteBatch);
+
+            foreach (var sprite in _menuBarrels)
+                sprite.Draw(spriteBatch);
+
+            _menuKong.Draw(spriteBatch);
+
+        }
 
     }
 }

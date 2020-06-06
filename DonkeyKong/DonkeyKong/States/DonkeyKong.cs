@@ -1,4 +1,12 @@
-﻿using DonkeyKong.GameComponents;
+﻿/***
+* Program : DonkeyKong
+* Author : Tiago Gama
+* Project : TPI 2020
+* Date : 25.05.2020 - 09.06.2020
+* Version : 1.0
+* Description : Recreation of the original Donkey Kong game by Nintendo
+***/
+using DonkeyKong.GameComponents;
 using DonkeyKong.Managers;
 using DonkeyKong.Models;
 using DonkeyKong.Sprites;
@@ -7,12 +15,9 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DonkeyKong.States
 {
@@ -25,6 +30,7 @@ namespace DonkeyKong.States
         //Brick variables
         Dictionary<string, List<Brick>> ground;
         List<Brick> lineOfBricks;
+        //Examplary brick used to spawn all the others
         Brick brick;
 
         //Ladder variables
@@ -77,9 +83,6 @@ namespace DonkeyKong.States
         SoundEffectInstance gameWonInstance;
 
 
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="game">The game variable</param>
         /// <param name="graphicsDevice">Information about the screen used to display the game</param>
         /// <param name="content"></param>
@@ -102,6 +105,9 @@ namespace DonkeyKong.States
             Initialize();
         }
 
+        /// <summary>
+        /// LoadContent will be called once per game to load all the content
+        /// </summary>
         public void LoadContent()
         {
             brick.LoadContent("Graphics/Ground");
@@ -160,6 +166,9 @@ namespace DonkeyKong.States
         }
 
 
+        /// <summary>
+        /// Ininializes all the necessary variables before the game starts
+        /// </summary>
         public void Initialize()
         {
             ground = new Dictionary<string, List<Brick>>();
@@ -194,18 +203,18 @@ namespace DonkeyKong.States
             LivesLeftDisplay();
 
             _kong = new Kong(_game, animationsKong, kongSoundEffects);
-            _kong.Position = new Vector2(stackedBarrels._texture.Width + (stackedBarrels._texture.Width / 10), ground["Level5"][0]._position.Y - _kong.height);
+            _kong.Position = new Vector2(stackedBarrels._texture.Width + (stackedBarrels._texture.Width / 10), ground["Level5"][0]._position.Y - _kong._height);
 
             _princess = new AnimatedSprite(_game, princessAnimations);
-            _princess.Position = new Vector2(ground["Level6"][0]._position.X, ground["Level6"][0]._position.Y - _princess.height);
+            _princess.Position = new Vector2(ground["Level6"][0]._position.X, ground["Level6"][0]._position.Y - _princess._height);
 
             oilBarrel = new AnimatedSprite(_game, oilBarrelAnimations);
-            oilBarrel.Position = new Vector2(_graphicsDevice.Viewport.Width * 0.01f, brick._position.Y - oilBarrel.height);
+            oilBarrel.Position = new Vector2(_graphicsDevice.Viewport.Width * 0.01f, brick._position.Y - oilBarrel._height);
         }
 
         /// <summary>
-        /// Creates the layout for game's platforms
-        /// Will adapt to different screen sizes -> Might need slight adjustments between them, especially the layer with princess
+        /// Creates the layout for game's platforms.
+        /// Will adapt to different screen sizes.
         /// </summary>
         private void GroundLayoutSpawn()
         {
@@ -303,52 +312,64 @@ namespace DonkeyKong.States
             ground.Add("Level6", lineOfBricks);
         }
 
+        /// <summary>
+        /// Spawns all the ladders, each ladder will be spawned in the 4th (counting from the end of a line) brick of each line and go down untill it meets a brick.
+        /// </summary>
         private void LadderSpawn()
         {
-
+            //Go from the last line to the first
             for (int i = 6; i > 0; i--)
             {
                 ladder = new Ladder(_game);
                 ladder.LoadContent("Graphics/Ladder");
 
                 Brick closestBrick = null;
+                //Start the minimum with the max distance possible
                 float minDist = _graphicsDevice.Viewport.Width;
-                int tmp2;
+                int startingBrickListPos;
+
+                //If its the princess line use the last brick instead of the 4th counting from the end
                 if (i == 6)
                 {
-                     tmp2 = ground["Level" + i.ToString()].Count - 1;
+                     startingBrickListPos = ground["Level" + i.ToString()].Count - 1;
                 }
                 else
                 {
-                     tmp2 = ground["Level" + i.ToString()].Count - 4;
+                     startingBrickListPos = ground["Level" + i.ToString()].Count - 4;
                 }
                 
-
+                //For each brick in the line below
                 foreach (Brick b in ground["Level" + (i - 1).ToString()])
                 {
-                    float dist = Math.Abs(ground["Level" + i.ToString()][tmp2]._position.X - b._position.X);
+                    //Get the difference between their X positions
+                    float dist = Math.Abs(ground["Level" + i.ToString()][startingBrickListPos]._position.X - b._position.X);
 
+                    //And if its smaller than the current minimum distance 
                     if (dist < minDist)
                     {
+                        //Set the new min distance and set the closest brick
                         minDist = dist;
                         closestBrick = b;
                     }
                 }
-                float spaceBetweenPlatforms = brick._texture.Height + closestBrick._position.Y - ground["Level" + i.ToString()][tmp2]._position.Y;
+                //Get the vertical space between both bricks
+                float spaceBetweenPlatforms = brick._texture.Height + closestBrick._position.Y - ground["Level" + i.ToString()][startingBrickListPos]._position.Y;
+                //Divide it by the ladder height, to get how many mini ladders we need to form a complete ladder
                 ladder.NbSpritesInStack = (int)(spaceBetweenPlatforms / ladder._texture.Height);
-
-                ladder._position = new Vector2(ground["Level" + i.ToString()][tmp2]._position.X, ground["Level" + i.ToString()][tmp2]._position.Y);
-
+                //Place the ladder at the starting brick position
+                ladder._position = new Vector2(ground["Level" + i.ToString()][startingBrickListPos]._position.X, ground["Level" + i.ToString()][startingBrickListPos]._position.Y);
+                //Add it to the ladder list
                 allLadders.Add(ladder);
             }
 
 
         }
 
-        private void BarrelSpawn(GameTime gameTime)
+        /// <summary>
+        /// Spawns a barrel when conditions are met
+        /// </summary>
+        private void BarrelSpawn()
         {
-
-
             if (_kong.CanSpawnBarrel())
             {
                 //Create a new animation for each barrel, otherwise animations will speed up
@@ -361,15 +382,18 @@ namespace DonkeyKong.States
                     Speed = new Vector2(4f, 3f)
                 };
 
+                //Adds the barrel to the barrel list
                 allBarrels.Add(ba);
 
             }
 
         }
 
+        /// <summary>
+        /// Updates the visual mario lives in the upper left corner
+        /// </summary>
         private void LivesLeftDisplay()
         {
-            
             for (int i = 0; i < _livesLeft; i++)
             {
                 GenericSprite lifeSprite = new GenericSprite(_game);
@@ -379,12 +403,16 @@ namespace DonkeyKong.States
             }
         }
 
+        /// <summary>
+        /// Runs all the game logic, all the collisions, animations, sounds, etc
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
-
+            //If the game isnt over
             if (!gameOver)
             {
-
+                //Pressing any of the upper arcade buttons will return to the menu
                 if (Keyboard.GetState().IsKeyDown(Keys.D6) ||
                     Keyboard.GetState().IsKeyDown(Keys.D7) ||
                     Keyboard.GetState().IsKeyDown(Keys.D8) ||
@@ -394,17 +422,18 @@ namespace DonkeyKong.States
                     GoBackToMenu();
                 }
 
-
+                //Update the game timer which is used for the score
                 _gameTimer.Update(gameTime);
                 score = _gameTimer.Text;
                 int scoreLength = score.Length;
+                //All display at least 4 digits
                 for (int i = 0; i < 4 - scoreLength; i++)
                 {
                     score = "0" + score;
                 }
 
-                brick.Update(gameTime);
 
+                brick.Update(gameTime);
                 foreach (List<Brick> lb in ground.Values)
                 {
                     foreach (Brick b in lb)
@@ -413,7 +442,7 @@ namespace DonkeyKong.States
                     }
                 }
 
-                _princess.Update(gameTime);
+                
                 BarrelLogic(gameTime);
 
                 foreach (Ladder l in allLadders)
@@ -422,23 +451,25 @@ namespace DonkeyKong.States
                 }
 
                 stackedBarrels.Update(gameTime);
+                _princess.Update(gameTime);
 
-
-                foreach (GenericSprite gs in allLives)
+                foreach (GenericSprite marioLives in allLives)
                 {
-                    gs.Update(gameTime);
+                    marioLives.Update(gameTime);
                 }
-                //barrel.Update(gameTime, ground);
+
                 _kong.Update(gameTime);
                 _mario.Update(gameTime, ground, allLadders, allBarrels);
+
                 MarioBarrelCollision();
 
                 WinCondition();
             }
-            else
+            else //If the game is over
             {
-                if (gameWon)
+                if (gameWon) //And you won it
                 {
+                    //Save your score unless you already did it
                     if (!scoreSaved)
                     {
                         _scoreManager.Add(new Score()
@@ -450,31 +481,30 @@ namespace DonkeyKong.States
                         scoreSaved = true;
                     }
 
+                    //Play the win game music
                     gameWonInstance.Play();
                 }
-                else
+                else //Or you lost it
                 {
+                    //Play the lose game music
                     gameOverInstance.Play();
                 }
 
+                //Start a timer and when it reaches 0 go back to the menu
+                //Timer's length is equal to the audio length
                 float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
                 timer -= elapsed;
                 if (timer < 0)
-                {
-                    //Timer expired, execute action
-
+                {              
                     GoBackToMenu();
-
                 }
             }
 
-
-           
-            
-
-
         }
 
+        /// <summary>
+        /// Checks whenever mario hits a barrel, if he has enough lives to keep playing or if it is a game over.
+        /// </summary>
         private void MarioBarrelCollision()
         {
             if (_mario.IsMarioDead() == true)
@@ -487,27 +517,41 @@ namespace DonkeyKong.States
                 else
                 {
                     gameOver = true;
-                    timer = 3; //Audio length
+                    //The 3s represent the losing music audio length
+                    timer = 3;
                 }
 
             }
         }
 
+        /// <summary>
+        /// Checkes for when Mario reaches the princess and wins
+        /// </summary>
         private void WinCondition()
         {
             if (_mario.Hitbox.Intersects(_princess.hitbox))
             {
                 gameOver = true;
                 gameWon = true;
+                //The 3s represent the winning music audio length
                 timer = 5.5f;//Audio length
             }
         }
 
+        /// <summary>
+        /// Changes states and goes to the menu
+        /// </summary>
         private void GoBackToMenu()
         {
-            _game.ChangeState(new HomeMenu(_game, _graphicsDevice, _content));
+            //Stops the sound from carrying over to the menu; 
+            _mario.StopAllSoundInstances();
+            _game.ChangeState(new HomeMenu(_game, _graphicsDevice, _content));            
         }
 
+        /// <summary>
+        /// All barrels updates are here and checks for when a barrel needs to be removed from the game.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values</param>
         private void BarrelLogic(GameTime gameTime)
         {
             oilBarrel.Update(gameTime);
@@ -516,24 +560,31 @@ namespace DonkeyKong.States
             {
                 ba.Update(gameTime, ground);
 
+                //If the barrel reaches the oil barrel at the end
                 if (ba.IsCollidingWithOilBarrel(oilBarrel))
                 {
+                    //Add it to the being removed list
                     toBeRemovedBarrels.Add(ba);
 
                 }
             }
 
+            //Remove all barrels who reached the end from the barrel list
             foreach (Barrel b in toBeRemovedBarrels)
             {
                 allBarrels.Remove(b);
-            }
+            }           
 
             toBeRemovedBarrels.Clear();
 
-
-            BarrelSpawn(gameTime);
+            BarrelSpawn();
         }
 
+        /// <summary>
+        /// All game components are drawn here.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values</param>
+        /// <param name="spriteBatch">Helper class for drawing strings and sprites</param>
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             _graphicsDevice.Clear(Color.Black);
@@ -565,13 +616,22 @@ namespace DonkeyKong.States
                 gs.Draw(spriteBatch);
             }
             oilBarrel.Draw(spriteBatch);
-            //barrel.Draw(spriteBatch);
             _kong.Draw(spriteBatch);
             _mario.Draw(spriteBatch);
 
 
             spriteBatch.DrawString(arcadeClassic, "HIGHSCORE  " + _scoreManager.Highscores[0].Value, new Vector2(_graphicsDevice.Viewport.Width - arcadeClassic.MeasureString("HIGHSCORE  " + _scoreManager.Highscores[0].Value).X, 0), Color.White);
             spriteBatch.DrawString(arcadeClassic, "SCORE  " + score, new Vector2(_graphicsDevice.Viewport.Width - arcadeClassic.MeasureString("SCORE  " + score).X, arcadeClassic.MeasureString("HIGHSCORE  " + _scoreManager.Highscores.Select(c => c.Value)).Y), Color.White);
+            EndGameDisplays(spriteBatch);
+
+        }
+
+        /// <summary>
+        /// When the game is over either display a You Win + the score or display Game Over
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+        private void EndGameDisplays(SpriteBatch spriteBatch)
+        {
             if (gameWon)
             {
                 spriteBatch.DrawString(arcadeClassicBig, "YOU WIN", new Vector2(_graphicsDevice.Viewport.Width / 2 - arcadeClassicBig.MeasureString("YOU WIN").X / 2, _graphicsDevice.Viewport.Height * 0.3f), Color.Red);
@@ -581,10 +641,6 @@ namespace DonkeyKong.States
             {
                 spriteBatch.DrawString(arcadeClassicBig, "GAME OVER", new Vector2(_graphicsDevice.Viewport.Width / 2 - arcadeClassicBig.MeasureString("GAME OVER").X / 2, _graphicsDevice.Viewport.Height * 0.3f), Color.Red);
             }
-
         }
-
-
-
     }
 }

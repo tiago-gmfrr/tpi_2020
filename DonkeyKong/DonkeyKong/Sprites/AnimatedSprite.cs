@@ -1,4 +1,12 @@
-﻿using DonkeyKong.Managers;
+﻿/***
+* Program : DonkeyKong
+* Author : Tiago Gama
+* Project : TPI 2020
+* Date : 25.05.2020 - 09.06.2020
+* Version : 1.0
+* Description : Recreation of the original Donkey Kong game by Nintendo
+***/
+using DonkeyKong.Managers;
 using DonkeyKong.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -12,6 +20,11 @@ using System.Threading.Tasks;
 
 namespace DonkeyKong.Sprites
 {
+
+    /// <summary>
+    /// A sprite with animations that cannot be moved
+    /// Inspiration : https://github.com/Oyyou/MonoGame_Tutorials/tree/master/MonoGame_Tutorials/Tutorial011
+    /// </summary>
     class AnimatedSprite : GenericSprite
     {
         #region Fields
@@ -20,18 +33,16 @@ namespace DonkeyKong.Sprites
 
         public Dictionary<string, Animation> _animations;
 
-        
-
-
-        float timer = 3;         //Initialize a 3 second timer
-        const float TIMER = 3;
+       
 
         #endregion
 
         #region Properties
 
         
-
+        /// <summary>
+        /// When setting the position property, also set the animation position
+        /// </summary>
         public Vector2 Position
         {
             get { return _position; }
@@ -44,8 +55,8 @@ namespace DonkeyKong.Sprites
             }
         }
 
-        public int height;
-        public int width;
+        public int _height;
+        public int _width;
 
 
         public Vector2 Speed = new Vector2(2f, 2f);
@@ -61,8 +72,10 @@ namespace DonkeyKong.Sprites
         {
             _animations = animations;
             _animationManager = new AnimationManager(_animations.First().Value);
-            height = _animations.First().Value.FrameHeight;
-            width = _animations.First().Value.FrameWidth;
+
+            //For the initial animatedSprite position, in the beginning the hitbox will not be set, so we use these
+            _height = _animations.First().Value.FrameHeight;
+            _width = _animations.First().Value.FrameWidth;
         }
 
         public AnimatedSprite(Game game, Texture2D texture) : base(game)
@@ -70,19 +83,11 @@ namespace DonkeyKong.Sprites
             _texture = texture;
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
-        {
 
-            if (_texture != null)
-                spriteBatch.Draw(_texture, Position, Color.White);
-            else if (_animationManager != null)
-                _animationManager.Draw(spriteBatch);
-            else throw new Exception("This ain't right..!");
-        }
-
-        
-
-
+        /// <summary>
+        /// Runs the position and hitbox logic, also updates the animation manager
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values</param>
         public override void Update(GameTime gameTime)
         {
 
@@ -99,6 +104,19 @@ namespace DonkeyKong.Sprites
             Velocity = Vector2.Zero;
         }
 
+        /// <summary>
+        /// Draws the animated sprite
+        /// </summary>
+        /// <param name="spriteBatch">Helper class for drawing strings and sprites</param>
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+
+            if (_texture != null)
+                spriteBatch.Draw(_texture, Position, Color.White);
+            else if (_animationManager != null)
+                _animationManager.Draw(spriteBatch);
+            
+        }
         #endregion
     }
 }

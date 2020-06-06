@@ -1,25 +1,32 @@
-﻿using DonkeyKong.Models;
+﻿/***
+* Program : DonkeyKong
+* Author : Tiago Gama
+* Project : TPI 2020
+* Date : 25.05.2020 - 09.06.2020
+* Version : 1.0
+* Description : Recreation of the original Donkey Kong game by Nintendo
+***/
+using DonkeyKong.Models;
 using DonkeyKong.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DonkeyKong.GameComponents
 {
+    /// <summary>
+    /// A Mario which can be moved with the keys given to the Input property.
+    /// Mario has different sets of animations and sounds.
+    /// He checks for collisions with ladders bricks and barrels and behaves differently when colliding with each of these objects
+    /// </summary>
     class Mario : MovingAnimatedSprite
     {
         #region Variables and properties
         private Rectangle _hitbox;
         private GraphicsDevice _graphicsDevice;
-
-        private int _width;
-        private int _height;
 
         private bool _inGame;
         private bool _isGoingRight;
@@ -39,10 +46,7 @@ namespace DonkeyKong.GameComponents
 
         #endregion
 
-        /// <summary>
-        /// Mario constructor, creates a mario object which can be moved with the keys given to the Input property.
-        /// Mario has different sets of animations and sounds .
-        /// </summary>
+        
         /// <param name="game">The game variable</param>
         /// <param name="animations">All mario animations</param>
         /// <param name="soundEffects">All mario sound effects</param>
@@ -83,8 +87,8 @@ namespace DonkeyKong.GameComponents
         {
             Hitbox = new Rectangle((int)_position.X, (int)_position.Y, _animations.First().Value.FrameWidth, _animations.First().Value.FrameHeight);
             Move();
-
             ScreenCollisions();
+            SetAnimationsAndSounds();
             base.Update(gameTime);
         }
 

@@ -1,6 +1,13 @@
-﻿using Microsoft.Xna.Framework;
+﻿/***
+* Program : DonkeyKong
+* Author : Tiago Gama
+* Project : TPI 2020
+* Date : 25.05.2020 - 09.06.2020
+* Version : 1.0
+* Description : Recreation of the original Donkey Kong game by Nintendo
+***/
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using DonkeyKong.States;
 
 namespace DonkeyKong
@@ -40,8 +47,8 @@ namespace DonkeyKong
             IsMouseVisible = false;
             graphics.GraphicsProfile = GraphicsProfile.Reach;
 
-            graphics.PreferredBackBufferWidth = 900;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            graphics.PreferredBackBufferHeight = 1000;// GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            graphics.PreferredBackBufferWidth = 900;
+            graphics.PreferredBackBufferHeight = 1000;
 
 
             //graphics.IsFullScreen = true;
@@ -76,7 +83,6 @@ namespace DonkeyKong
             }
 
             _currentState.Update(gameTime);
-            //_currentState.PostUpdate(gameTime);
 
             base.Update(gameTime);
         }

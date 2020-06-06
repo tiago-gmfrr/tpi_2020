@@ -68,3 +68,8 @@ C:\Users\Tiago\Desktop\GIT\tpi_2020\DonkeyKong\DonkeyKong\bin\Windows\x86\Debug\
 C:\Users\Tiago\Desktop\GIT\tpi_2020\DonkeyKong\DonkeyKong\bin\Windows\x86\Debug\Content\arcadeClassicBig.xnb
 C:\Users\Tiago\Desktop\GIT\tpi_2020\DonkeyKong\DonkeyKong\bin\Windows\x86\Debug\Content\Sounds\SoundEffects\gameOver.xnb
 C:\Users\Tiago\Desktop\GIT\tpi_2020\DonkeyKong\DonkeyKong\bin\Windows\x86\Debug\Content\Sounds\SoundEffects\gameWon.xnb
+C:\Users\Tiago\Desktop\GIT\tpi_2020\DonkeyKong\DonkeyKong\bin\Windows\x86\Debug\Content\Graphics\JoystickUpDown.xnb
+C:\Users\Tiago\Desktop\GIT\tpi_2020\DonkeyKong\DonkeyKong\bin\Windows\x86\Debug\Content\Graphics\JoystickRightLeft.xnb
+C:\Users\Tiago\Desktop\GIT\tpi_2020\DonkeyKong\DonkeyKong\bin\Windows\x86\Debug\Content\Graphics\MarioClimbingExample.xnb
+C:\Users\Tiago\Desktop\GIT\tpi_2020\DonkeyKong\DonkeyKong\bin\Windows\x86\Debug\Content\Graphics\MarioJumpingExample.xnb
+C:\Users\Tiago\Desktop\GIT\tpi_2020\DonkeyKong\DonkeyKong\bin\Windows\x86\Debug\Content\Graphics\MarioMovingExample.xnb

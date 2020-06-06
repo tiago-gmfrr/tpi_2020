@@ -3,7 +3,7 @@
   <SourceFile>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Sounds/SoundEffects/marioClimb.wav</SourceFile>
   <SourceTime>2020-06-05T13:03:13.0937475+02:00</SourceTime>
   <DestFile>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/bin/Windows/Sounds/SoundEffects/marioClimb.xnb</DestFile>
-  <DestTime>2020-06-05T22:46:25.1926549+02:00</DestTime>
+  <DestTime>2020-06-06T21:08:39.1772538+02:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

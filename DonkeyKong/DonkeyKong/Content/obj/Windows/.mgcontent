@@ -31,12 +31,17 @@
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/Ground.png</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/Joystick.png</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/JoystickInfoText.png</File>
+    <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/JoystickRightLeft.png</File>
+    <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/JoystickUpDown.png</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/KongCenter.png</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/KongLeft.png</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/KongRight.png</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/Ladder.png</File>
+    <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/MarioClimbingExample.png</File>
+    <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/MarioJumpingExample.png</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/marioLife.png</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/MarioMenuPicker.png</File>
+    <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/MarioMovingExample.png</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/OilBarrel.png</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Graphics/StackedBarrels.png</File>
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Sounds/Music/gameMusic.mp3</File>
@@ -49,6 +54,11 @@
     <File>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Sounds/SoundEffects/walking.wav</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

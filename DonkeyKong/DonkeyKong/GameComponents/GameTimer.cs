@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace DonkeyKong.GameComponents
 {
+    /// <summary>
+    /// Inspiration pour la classe https://www.youtube.com/watch?v=-2FeSrYT1KE
+    /// </summary>
     class GameTimer : GameComponent
     {
 
@@ -21,6 +24,11 @@ namespace DonkeyKong.GameComponents
         public bool Paused { get => paused; set => paused = value; }
         public bool Finished { get => finished; set => finished = value; }
 
+        /// <summary>
+        /// GameTimer constructor, creates a new game timer which starts unset and needs to be started
+        /// </summary>
+        /// <param name="game">The game variable</param>
+        /// <param name="startTime">When does the timer start</param>
         public GameTimer(Game game, float startTime): base(game)
         {
             time = startTime;
@@ -29,6 +37,10 @@ namespace DonkeyKong.GameComponents
             Finished = false;
         }
 
+        /// <summary>
+        /// Runs the timer logic
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values</param>
         public override void Update(GameTime gameTime)
         {
 

@@ -1,4 +1,11 @@
-﻿
+﻿/***
+* Program : DonkeyKong
+* Author : Tiago Gama
+* Project : TPI 2020
+* Date : 25.05.2020 - 09.06.2020
+* Version : 1.0
+* Description : Recreation of the original Donkey Kong game by Nintendo
+***/
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,8 +14,8 @@ namespace DonkeyKong.States
 {
 
     /// <summary>
-    /// Allows the creation of multiple states
-    /// Source : https://github.com/Oyyou/MonoGame_Tutorials
+    /// The state class is a model for the creation of multiple states, a "state" represents different parts of the program, for example the menu is a state, and the game is another one.
+    /// Inspiration : https://github.com/Oyyou/MonoGame_Tutorials
     /// </summary>
     public abstract class State
     {
@@ -25,10 +32,6 @@ namespace DonkeyKong.States
         #region Methods
 
 
-        public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
-
-        //public abstract void PostUpdate(GameTime gameTime);
-
         public State(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
         {
             _game = game;
@@ -39,6 +42,8 @@ namespace DonkeyKong.States
         }
 
         public abstract void Update(GameTime gameTime);
+
+        public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
 
         #endregion
     }

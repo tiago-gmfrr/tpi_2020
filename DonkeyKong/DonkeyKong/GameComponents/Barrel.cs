@@ -13,9 +13,6 @@ namespace DonkeyKong.GameComponents
     class Barrel : MovingAnimatedSprite
     {
 
-        int _height;
-        int _width;
-
         GraphicsDevice _graphicsDevice;
 
         /// <summary>

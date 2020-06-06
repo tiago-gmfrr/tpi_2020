@@ -1,4 +1,12 @@
-﻿using Microsoft.Xna.Framework;
+﻿/***
+* Program : DonkeyKong
+* Author : Tiago Gama
+* Project : TPI 2020
+* Date : 25.05.2020 - 09.06.2020
+* Version : 1.0
+* Description : Recreation of the original Donkey Kong game by Nintendo
+***/
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -8,6 +16,9 @@ using System.Threading.Tasks;
 
 namespace DonkeyKong.Sprites
 {
+    /// <summary>
+    /// A sprite with generic attributes such as a position, hitbox and a texture, mainly meant to be used for heritage
+    /// </summary>
     class GenericSprite
     {
         #region Variables
@@ -24,7 +35,7 @@ namespace DonkeyKong.Sprites
         #region Constructor + Initialize + LoadContent
         /// <summary>
         /// Constructor, requires the game to be able to load content
-        /// Usually not used by anyone but its children, leaving it public for now just in case
+        /// Usually not used by anyone but its children
         /// </summary>
         public GenericSprite(Game game)
         {
@@ -56,7 +67,7 @@ namespace DonkeyKong.Sprites
         /// <summary>
         /// Updates the position and hitbox of the sprite
         /// </summary>
-        /// <param name="gameTime"></param>
+        /// <param name="gameTime">Provides a snapshot of timing values</param>
         public virtual void Update(GameTime gameTime)
         {
 
@@ -70,7 +81,7 @@ namespace DonkeyKong.Sprites
         /// <summary>
         /// Draws the sprite with a texture an hitbox and keeps its original color
         /// </summary>
-        /// <param name="spriteBatch"></param>
+        /// <param name="spriteBatch">Helper class for drawing strings and sprites</param>
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             //Draw the sprite
