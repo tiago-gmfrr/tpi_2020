@@ -1,0 +1,102 @@
+\documentclass[a4paper,12pt]{report}
+
+\usepackage[francais]{babel} % Typographie
+\usepackage[T1]{fontenc}     % Saisie en
+\usepackage[utf8]{inputenc} % français
+\usepackage{lmodern}
+
+%% Réglages généraux
+\usepackage[left=2.5cm, right=2cm, top=1.5cm, bottom=1.5cm]{geometry} % taille de la feuille
+\usepackage{fancyhdr} % Titre courant
+\usepackage{lastpage} % pour avoir \pageref{LastPage} : le nombre total de pages du doc
+\usepackage{hyperref}
+\usepackage{blindtext}
+\usepackage{graphicx}
+
+%infos sur le document : auteur, titre, version (utilisées en page de garde, pied de page, filigrane...)
+\newcommand{\docauthor}{Gama Ferreira Carvalho Tiago}
+\newcommand{\doctitle}{\jobname{}.tex}
+%----------------------------------------------------------
+
+% Entête et pied de page.
+\pagestyle{fancy}
+\fancyfoot[CO,CE]{\footnotesize\thepage~/~\pageref{LastPage}}
+\fancyfoot[RO,RE]{\scriptsize\emph{\docauthor{}}}
+\fancyfoot[LO,LE]{\scriptsize\emph{\doctitle{}}}
+\fancyhead[LO,CO,RO]{}
+
+\include{./inc_lst_csharp}
+
+% le document commence réellement ici
+\begin{document}
+
+	\title{TPI 2020 - Donkey Kong }
+	\author{Gama Ferreira Carvalho Tiago \\ I.FA-P3A \\ École d'informatique (CFPT-I)}
+	\date{19 Mai 2020}
+	\maketitle
+
+\tableofcontents
+\newcommand{\mylstinputlisting}[1]{\lstinputlisting[caption={\texttt{#1}}]{#1}}
+			
+
+\chapter{Monokong}
+	\section{Game} 	
+		\subsection{Game1.cs}
+			\mylstinputlisting{./DonkeyKong/DonkeyKong/Game1.cs}
+\newpage
+	\section{States}
+		\subsection{State.cs}
+			\mylstinputlisting{./DonkeyKong/DonkeyKong/States/State.cs}
+		\subsection{HomeMenu.cs}
+			\mylstinputlisting{./DonkeyKong/DonkeyKong/States/HomeMenu.cs}
+		\subsection{InfoPage.cs}
+			\mylstinputlisting{./DonkeyKong/DonkeyKong/States/InfoPage.cs}
+		\subsection{DonkeyKong.cs}
+			\mylstinputlisting{./DonkeyKong/DonkeyKong/States/DonkeyKong.cs}
+\newpage
+	\section{Sprites}
+		\subsection{GenericSprite.cs}
+			\mylstinputlisting{./DonkeyKong/DonkeyKong/Sprites/GenericSprite.cs}
+		\subsection{AnimatedSprite.cs}
+			\mylstinputlisting{./DonkeyKong/DonkeyKong/Sprites/AnimatedSprite.cs}
+		\subsection{MovingAnimatedSprite.cs}
+			\mylstinputlisting{./DonkeyKong/DonkeyKong/Sprites/MovingAnimatedSprite.cs}
+\newpage
+	\section{Models}
+		\subsection{Animation.cs}
+			\mylstinputlisting{./DonkeyKong/DonkeyKong/Models/Animation.cs}
+		\subsection{Score.cs}
+			\mylstinputlisting{./DonkeyKong/DonkeyKong/Models/Score.cs}
+\newpage
+	\section{Managers}
+		\subsection{AnimationManager.cs}
+			\mylstinputlisting{./DonkeyKong/DonkeyKong/Managers/AnimationManager.cs}
+		\subsection{Input.cs}
+			\mylstinputlisting{./DonkeyKong/DonkeyKong/Managers/Input.cs}
+		\subsection{ScoreManager.cs}
+			\mylstinputlisting{./DonkeyKong/DonkeyKong/Managers/ScoreManager.cs}
+\newpage
+	\section{GameComponents}
+		\subsection{Barrel.cs}
+			\mylstinputlisting{./DonkeyKong/DonkeyKong/GameComponents/Barrel.cs}
+		\subsection{Brick.cs}
+			\mylstinputlisting{./DonkeyKong/DonkeyKong/GameComponents/Brick.cs}
+		\subsection{GameTimer.cs}
+			\mylstinputlisting{./DonkeyKong/DonkeyKong/GameComponents/GameTimer.cs}
+		\subsection{Kong.cs}
+			\mylstinputlisting{./DonkeyKong/DonkeyKong/GameComponents/Kong.cs}
+		\subsection{Ladder.cs}
+			\mylstinputlisting{./DonkeyKong/DonkeyKong/GameComponents/Ladder.cs}
+		\subsection{Mario.cs}
+			\mylstinputlisting{./DonkeyKong/DonkeyKong/GameComponents/Mario.cs}
+\newpage
+	\section{Controls}
+		\subsection{MenuButton.cs}
+			\mylstinputlisting{./DonkeyKong/DonkeyKong/Controls/MenuButton.cs}
+\newpage
+	\section{Tests}
+		\subsection{ScoreManagerTests.cs}
+			\mylstinputlisting{./DonkeyKong/DonkeyKongTests/Managers/ScoreManagerTests.cs}
+			
+
+\end{document}

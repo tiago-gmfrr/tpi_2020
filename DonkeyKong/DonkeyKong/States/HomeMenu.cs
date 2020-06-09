@@ -71,17 +71,17 @@ namespace DonkeyKong.States
         {
             animationsMovementMario = new Dictionary<string, Animation>()
             {
-                { "WalkRight", new Animation(_content.Load<Texture2D>("Graphics/Animations/MarioWalkRight"),3)},
-                { "WalkLeft", new Animation(_content.Load<Texture2D>("Graphics/Animations/MarioWalkLeft"), 3)},
-                { "WalkDown", new Animation(_content.Load<Texture2D>("Graphics/Animations/MarioWalkRight"),3)},
-                { "WalkUp", new Animation(_content.Load<Texture2D>("Graphics/Animations/MarioWalkRight"), 3)},
+                { "WalkRight", new Animation(_content.Load<Texture2D>( "Graphics/Animations/MarioWalkRight"),3)},
+                { "WalkLeft", new Animation(_content.Load<Texture2D>( "Graphics/Animations/MarioWalkLeft"), 3)},
+                { "WalkDown", new Animation(_content.Load<Texture2D>( "Graphics/Animations/MarioWalkRight"),3)},
+                { "WalkUp", new Animation(_content.Load<Texture2D>( "Graphics/Animations/MarioWalkRight"), 3)},
             };
 
             Dictionary<string, SoundEffect> marioSOundEffects = new Dictionary<string, SoundEffect>()
             {
-                {"Walking", _content.Load<SoundEffect>("Sounds/SoundEffects/walking") },
-                {"Jump", _content.Load<SoundEffect>("Sounds/SoundEffects/jump") },
-                {"Climbing", _content.Load<SoundEffect>("Sounds/SoundEffects/marioClimb") },
+                {"Walking", _content.Load<SoundEffect>( "Sounds/SoundEffects/walking") },
+                {"Jump", _content.Load<SoundEffect>( "Sounds/SoundEffects/jump") },
+                {"Climbing", _content.Load<SoundEffect>( "Sounds/SoundEffects/marioClimb") },
             };
 
             _mario = new Mario(_game, animationsMovementMario, marioSOundEffects, _graphicsDevice)
@@ -98,12 +98,12 @@ namespace DonkeyKong.States
 
             var animationsMenuBarrels1 = new Dictionary<string, Animation>()
             {
-                { "Animated", new Animation(_content.Load<Texture2D>("Graphics/Animations/MenuBarrels"),2)},
+                { "Animated", new Animation(_content.Load<Texture2D>( "Graphics/Animations/MenuBarrels"),2)},
             };
 
             var animationsMenuBarrels2 = new Dictionary<string, Animation>()
             {
-                { "Animated", new Animation(_content.Load<Texture2D>("Graphics/Animations/MenuBarrels"),2)},
+                { "Animated", new Animation(_content.Load<Texture2D>( "Graphics/Animations/MenuBarrels"),2)},
             };
 
             _menuBarrels = new List<AnimatedSprite>()
@@ -122,7 +122,7 @@ namespace DonkeyKong.States
 
             var animationsMenuKong = new Dictionary<string, Animation>()
             {
-                { "Animated", new Animation(_content.Load<Texture2D>("Graphics/Animations/KongIdleAnimation"),3)},
+                { "Animated", new Animation(_content.Load<Texture2D>( "Graphics/Animations/KongIdleAnimation"),3)},
             };
 
 
@@ -131,8 +131,8 @@ namespace DonkeyKong.States
             _menuKong.Position = new Vector2(_graphicsDevice.Viewport.Width / 2 - _menuKong._width / 2, _graphicsDevice.Viewport.Height * 0.45f);
 
 
-            gameBackgroundMusic = _game.Content.Load<Song>("Sounds/Music/gameMusic");
-            menuBackgroundMusic = _game.Content.Load<Song>("Sounds/Music/menuMusic");
+            gameBackgroundMusic = _game.Content.Load<Song>( "Sounds/Music/gameMusic");
+            menuBackgroundMusic = _game.Content.Load<Song>( "Sounds/Music/menuMusic");
 
 
             MediaPlayer.Play(menuBackgroundMusic);

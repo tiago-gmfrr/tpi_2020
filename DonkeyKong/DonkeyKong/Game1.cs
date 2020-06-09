@@ -51,7 +51,7 @@ namespace DonkeyKong
             graphics.PreferredBackBufferHeight = 1000;
 
 
-            //graphics.IsFullScreen = true;
+            graphics.IsFullScreen = true;
             graphics.ApplyChanges();
             base.Initialize();
         }

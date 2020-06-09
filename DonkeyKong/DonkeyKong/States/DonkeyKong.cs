@@ -110,54 +110,54 @@ namespace DonkeyKong.States
         /// </summary>
         public void LoadContent()
         {
-            brick.LoadContent("Graphics/Ground");
-            stackedBarrels.LoadContent("Graphics/StackedBarrels");
+            brick.LoadContent( "Graphics/Ground");
+            stackedBarrels.LoadContent( "Graphics/StackedBarrels");
 
-            arcadeClassic = _content.Load<SpriteFont>("arcadeClassic");
-            arcadeClassicBig = _content.Load<SpriteFont>("arcadeClassicBig");
+            arcadeClassic = _content.Load<SpriteFont>( "arcadeClassic");
+            arcadeClassicBig = _content.Load<SpriteFont>( "arcadeClassicBig");
             animationsMovementMario = new Dictionary<string, Animation>()
             {
-                { "WalkRight", new Animation(_content.Load<Texture2D>("Graphics/Animations/MarioWalkRight"),3)},
-                { "WalkLeft", new Animation(_content.Load<Texture2D>("Graphics/Animations/MarioWalkLeft"), 3)},
-                { "WalkDown", new Animation(_content.Load<Texture2D>("Graphics/Animations/MarioWalkRight"),3)},
-                { "Climb", new Animation(_content.Load<Texture2D>("Graphics/Animations/MarioClimb"), 2)},
-                { "JumpRight", new Animation(_content.Load<Texture2D>("Graphics/Animations/MarioJumpingRight"), 2)},
-                { "JumpLeft", new Animation(_content.Load<Texture2D>("Graphics/Animations/MarioJumpingLeft"), 2)},
+                { "WalkRight", new Animation(_content.Load<Texture2D>( "Graphics/Animations/MarioWalkRight"),3)},
+                { "WalkLeft", new Animation(_content.Load<Texture2D>( "Graphics/Animations/MarioWalkLeft"), 3)},
+                { "WalkDown", new Animation(_content.Load<Texture2D>( "Graphics/Animations/MarioWalkRight"),3)},
+                { "Climb", new Animation(_content.Load<Texture2D>( "Graphics/Animations/MarioClimb"), 2)},
+                { "JumpRight", new Animation(_content.Load<Texture2D>( "Graphics/Animations/MarioJumpingRight"), 2)},
+                { "JumpLeft", new Animation(_content.Load<Texture2D>( "Graphics/Animations/MarioJumpingLeft"), 2)},
             };
 
             marioSoundEffects = new Dictionary<string, SoundEffect>()
             {
-                {"Walking", _content.Load<SoundEffect>("Sounds/SoundEffects/walking") },
-                {"Jump", _content.Load<SoundEffect>("Sounds/SoundEffects/jump") },
-                {"Climbing", _content.Load<SoundEffect>("Sounds/SoundEffects/marioClimb") },
+                { "Walking", _content.Load<SoundEffect>( "Sounds/SoundEffects/walking") },
+                { "Jump", _content.Load<SoundEffect>( "Sounds/SoundEffects/jump") },
+                { "Climbing", _content.Load<SoundEffect>( "Sounds/SoundEffects/marioClimb") },
             };
 
 
 
             animationsKong = new Dictionary<string, Animation>()
             {
-                { "Idle", new Animation(_content.Load<Texture2D>("Graphics/Animations/KongIdleAnimationSmall"),3)},
-                { "GrabBarrel", new Animation(_content.Load<Texture2D>("Graphics/Animations/KongBarrelAnimation"), 3)},
+                { "Idle", new Animation(_content.Load<Texture2D>( "Graphics/Animations/KongIdleAnimationSmall"),3)},
+                { "GrabBarrel", new Animation(_content.Load<Texture2D>( "Graphics/Animations/KongBarrelAnimation"), 3)},
             };
 
             kongSoundEffects = new Dictionary<string, SoundEffect>()
             {
-                {"Idle", _content.Load<SoundEffect>("Sounds/SoundEffects/kongStomp") },
+                {"Idle", _content.Load<SoundEffect>( "Sounds/SoundEffects/kongStomp") },
             };
 
             oilBarrelAnimations = new Dictionary<string, Animation>()
             {
-                { "Animation", new Animation(_content.Load<Texture2D>("Graphics/Animations/oilBarrelAnimation"), 2) }
+                { "Animation", new Animation(_content.Load<Texture2D>( "Graphics/Animations/oilBarrelAnimation"), 2) }
             };
 
             princessAnimations = new Dictionary<string, Animation>()
             {
-                { "Animation", new Animation(_content.Load<Texture2D>("Graphics/Animations/PrincessAnimation"), 2) }
+                { "Animation", new Animation(_content.Load<Texture2D>( "Graphics/Animations/PrincessAnimation"), 2) }
             };
 
-            gameOverSound = _content.Load<SoundEffect>("Sounds/SoundEffects/gameOver");
+            gameOverSound = _content.Load<SoundEffect>( "Sounds/SoundEffects/gameOver");
             gameOverInstance = gameOverSound.CreateInstance();
-            gameWonSound = _content.Load<SoundEffect>("Sounds/SoundEffects/gameWon");
+            gameWonSound = _content.Load<SoundEffect>( "Sounds/SoundEffects/gameWon");
             gameWonInstance = gameWonSound.CreateInstance();
 
 
@@ -417,7 +417,8 @@ namespace DonkeyKong.States
                     Keyboard.GetState().IsKeyDown(Keys.D7) ||
                     Keyboard.GetState().IsKeyDown(Keys.D8) ||
                     Keyboard.GetState().IsKeyDown(Keys.D9) ||
-                    Keyboard.GetState().IsKeyDown(Keys.D0))
+                    Keyboard.GetState().IsKeyDown(Keys.D0) ||
+                    Keyboard.GetState().IsKeyDown(Keys.Escape))
                 {
                     GoBackToMenu();
                 }

@@ -70,35 +70,35 @@ namespace DonkeyKong.States
         public void LoadContent()
         {
 
-            arcadeClassic = _content.Load<SpriteFont>("arcadeClassic");
+            arcadeClassic = _content.Load<SpriteFont>( "arcadeClassic");
 
-            DKTitle.LoadContent("Graphics/DKTitle");
+            DKTitle.LoadContent( "Graphics/DKTitle");
 
-            joystickRightLeft.LoadContent("Graphics/JoystickRightLeft");
-            marioWalking.LoadContent("Graphics/MarioMovingExample");
+            joystickRightLeft.LoadContent( "Graphics/JoystickRightLeft");
+            marioWalking.LoadContent( "Graphics/MarioMovingExample");
 
-            joystickUpDown.LoadContent("Graphics/JoystickUpDown");
-            marioClimbing.LoadContent("Graphics/MarioClimbingExample");
+            joystickUpDown.LoadContent( "Graphics/JoystickUpDown");
+            marioClimbing.LoadContent( "Graphics/MarioClimbingExample");
 
-            arcadeButtons.LoadContent("Graphics/ArcadeButtons");
-            marioJumping.LoadContent("Graphics/MarioJumpingExample");
+            arcadeButtons.LoadContent( "Graphics/ArcadeButtons");
+            marioJumping.LoadContent( "Graphics/MarioJumpingExample");
 
-            goBackButton.LoadContent("Controls/GoBackButton");
+            goBackButton.LoadContent( "Controls/GoBackButton");
 
 
             animationsMovementMario = new Dictionary<string, Animation>()
             {
-                { "WalkRight", new Animation(_content.Load<Texture2D>("Graphics/Animations/MarioWalkRight"),3)},
-                { "WalkLeft", new Animation(_content.Load<Texture2D>("Graphics/Animations/MarioWalkLeft"), 3)},
-                { "WalkDown", new Animation(_content.Load<Texture2D>("Graphics/Animations/MarioWalkRight"),3)},
-                { "WalkUp", new Animation(_content.Load<Texture2D>("Graphics/Animations/MarioWalkRight"), 3)},
+                { "WalkRight", new Animation(_content.Load<Texture2D>( "Graphics/Animations/MarioWalkRight"),3)},
+                { "WalkLeft", new Animation(_content.Load<Texture2D>( "Graphics/Animations/MarioWalkLeft"), 3)},
+                { "WalkDown", new Animation(_content.Load<Texture2D>( "Graphics/Animations/MarioWalkRight"),3)},
+                { "WalkUp", new Animation(_content.Load<Texture2D>( "Graphics/Animations/MarioWalkRight"), 3)},
             };
 
             Dictionary<string, SoundEffect> marioSOundEffects = new Dictionary<string, SoundEffect>()
             {
-                {"Walking", _content.Load<SoundEffect>("Sounds/SoundEffects/walking") },
-                {"Jump", _content.Load<SoundEffect>("Sounds/SoundEffects/jump") },
-                {"Climbing", _content.Load<SoundEffect>("Sounds/SoundEffects/marioClimb") },
+                {"Walking", _content.Load<SoundEffect>( "Sounds/SoundEffects/walking") },
+                {"Jump", _content.Load<SoundEffect>( "Sounds/SoundEffects/jump") },
+                {"Climbing", _content.Load<SoundEffect>( "Sounds/SoundEffects/marioClimb") },
             };
 
             _mario = new Mario(_game, animationsMovementMario, marioSOundEffects, _graphicsDevice)
