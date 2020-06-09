@@ -3,7 +3,7 @@
   <SourceFile>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/Sounds/SoundEffects/kongStomp.wav</SourceFile>
   <SourceTime>2020-06-05T10:36:40.2190915+02:00</SourceTime>
   <DestFile>C:/Users/Tiago/Desktop/GIT/tpi_2020/DonkeyKong/DonkeyKong/Content/bin/Windows/Sounds/SoundEffects/kongStomp.xnb</DestFile>
-  <DestTime>2020-06-08T19:22:49.2891903+02:00</DestTime>
+  <DestTime>2020-06-09T14:08:15.7581505+02:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>
